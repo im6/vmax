@@ -16,7 +16,8 @@
     "url": "https://github.com/zj1926/vmax/issues"
   },
   "homepage": "https://github.com/zj1926/vmax#readme",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
     "webpack": "^2.2.1"
   }
 }
