@@ -9,28 +9,10 @@ const SubMenu = Menu.SubMenu;
 import style from './style.less';
 
 
-const groupNameMap = {
-  '/':'list',
-  '/latest':'list',
-  '/resourceapi':'service',
-  '/new':'service',
-  '/about':'about'
-};
-const itemKeyNameMap = {
-  '/':'index',
-  '/latest':'latest',
-  '/resourceapi':'resourceapi',
-  '/new':'new',
-  '/about':'about'
-};
-
 class SlideoutMenu extends React.Component {
   constructor(props) {
     super(props);
     let me = this;
-    me.state={
-      current: [groupNameMap[me.props.currentPath], itemKeyNameMap[me.props.currentPath]]
-    }
   }
 
   componentDidMount() {
@@ -58,11 +40,9 @@ class SlideoutMenu extends React.Component {
         theme="dark"
         onClick={me.handleClick.bind(me)}
         style={{ width: '100%' }}
-        selectedKeys={me.state.current}
-        defaultOpenKeys={me.state.current}
         mode="inline"
         >
-        <SubMenu key="list" title={<h3><Icon type="home" />ColorPK.com</h3>}>
+        <SubMenu key="list" title={<h3><Icon type="home" />VMAX</h3>}>
           <Menu.Item key="index">
             <Link to="/">
               <h3>
@@ -70,8 +50,8 @@ class SlideoutMenu extends React.Component {
                 Popular
               </h3>
             </Link>
-
           </Menu.Item>
+
           <Menu.Item key="latest">
             <Link to="/latest">
               <h3>
@@ -82,43 +62,36 @@ class SlideoutMenu extends React.Component {
 
           </Menu.Item>
         </SubMenu>
-        <SubMenu key="service" title={<h3><Icon type="appstore" />Service</h3>}>
-          <Menu.Item key="resourceapi">
-            <Link to="/resourceapi">
-              <h3>
-                <Icon type="hdd" />
-                API
-              </h3>
-            </Link>
+        <SubMenu key="sce" title={<h3><Icon type="appstore" />Scenario</h3>}>
+          <Menu.Item key="home">
+            <h3>
+              <Icon type="android" />
+              Home
+            </h3>
           </Menu.Item>
-          <Menu.Item key="new">
-            <Link to="/new">
-              <h3>
-                <Icon type="filter" />
-                Extraction
-              </h3>
-            </Link>
-
+          <Menu.Item key="hotel">
+            <h3>
+              <Icon type="android" />
+              Hotel
+            </h3>
           </Menu.Item>
         </SubMenu>
-        <SubMenu key="about" title={<h3><Icon type="info-circle" />About</h3>}>
-          <Menu.Item key="about">
-            <Link to="/about">
-              <h3>
-                <Icon type="book" />
-                Site
-              </h3>
-            </Link>
 
+        <SubMenu key="tools" title={<h3><Icon type="edit" />Tools</h3>}>
+          <Menu.Item key="dup">
+            <h3>
+              <Icon type="android" />
+              Dup Detector
+            </h3>
           </Menu.Item>
-          <Menu.Item key="zj">
-            <a href={Global.zjweb} target="_blank">
-              <h3>
-                <Icon type="user" />Auther
-              </h3>
-            </a>
+          <Menu.Item key="udpate">
+            <h3>
+              <Icon type="android" />
+              Updater
+            </h3>
           </Menu.Item>
         </SubMenu>
+
       </Menu>
     </div>;
 

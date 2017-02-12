@@ -3,19 +3,32 @@ import { handleActions } from 'redux-actions';
 import Immutable, {Map, List} from 'immutable';
 import { message } from 'antd';
 
+let temp = [
+];
+for(var a = 0; a < 20; a ++){
+  temp.push({c: 'abs', i: 123, im: '/Users/ZJ/Documents/ZJ/Image/Wallpaper/Creative_idea.jpg', m: 'movie'})
+}
+
 const movie = handleActions({
-  ['movie/getLatest'](state, action) {
+  ['movie/get'](state, action) {
     return state.merge({
       loading: true,
       list: [],
       type: 'latest'
     });
   },
-  
-  ['movie/getLikemovie/fail'](state, action) {
-    message.error('Getting favourite movie error. Please try again');
+  ['movie/get/fail'](state, action) {
     return state.merge({
-      loading: false
+      loading: true,
+      list: temp,
+      type: 'latest'
+    });
+  },
+  ['movie/get/success'](state, action) {
+    return state.merge({
+      loading: true,
+      list: [],
+      type: 'latest'
     });
   },
 

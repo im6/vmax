@@ -93,8 +93,7 @@ class List extends React.Component {
     let endKey = null;
     if(me.props.list){
       endKey = (me.props.list.size-1).toString();
-    }
-    
+    }    
 
     return <div style={{minHeight: 800}}>
       {
@@ -113,16 +112,13 @@ class List extends React.Component {
                  className={clsStr}>
         {
           me.props.list.map((v, k) => {
-            return (<Col xs={12}
-                         sm={12}
-                         md={8}
-                         lg={6}
+            return (<Col xs={24}
+                         sm={24}
+                         md={12}
+                         lg={12}
                          key={k}
                          className={style.colContainer}>
-              <Box boxInfo={v}
-                   boxWidth={boxW}
-                   isMobile={im}
-                   onLikeClick={me.onLikeClickHandler.bind(me, k)} />
+              <Box detail={v}/>
             </Col>);
           })
         }
@@ -133,7 +129,6 @@ class List extends React.Component {
 }
 
 function mapStateToProps({movie}){
-
   return {
     list: movie.get('list'),
     loading: false

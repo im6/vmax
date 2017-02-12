@@ -5,13 +5,13 @@ import { createAction } from 'redux-actions';
 
 function* watchers(a) {
   yield [
-    takeLatest("movie/get", initMovie),
+    takeLatest("movie/get", getMovies),
   ]
 }
 
-function* initMovie(action) {
+function* getMovies(action) {
   try {
-    const payload = yield call(requester, '/api/initColorLike');
+    const payload = yield call(requester, '/api/getmovie');
     if(payload.error){
       yield put({
         type: "movie/get/fail",
@@ -34,4 +34,6 @@ function* initMovie(action) {
 
 export default function*(){
   yield fork(watchers);
+  let actCreater = createAction('movie/get');
+  yield put(actCreater());
 }
