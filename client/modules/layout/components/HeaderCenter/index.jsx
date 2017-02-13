@@ -16,9 +16,9 @@ const HeaderCenter = ({isNavBtnActive}) => {
       <Col lg={20} md={19} sm={18} xs={24} className={style.leftHeaderContainer}>
 
         <MenuButton isNavBtnActive={isNavBtnActive}/>
-        &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;
         <Button type="default" icon="home">
-            click here
+            Refresh
         </Button>
       </Col>
 

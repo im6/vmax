@@ -58,19 +58,15 @@ class List extends React.Component {
     let elem = ev.target.body;
     let scrollBtn = elem.scrollHeight - elem.clientHeight - elem.scrollTop;
     if(scrollBtn < st){
-      let actcr = createAction('color/loadMore');
+      let actcr = createAction('movie/loadmore');
       me.props.dispatch(actcr());
     }
   };
 
-
   onAnimEnd(endKey, type){
     let me = this;
     if(endKey === type.key){
-      if(type.type === 'enter' &&
-        (me.props.colorType === 'popular' || me.props.colorType === 'latest')){
-        me.isAnimating = false;
-      }
+      me.isAnimating = false;
     }
   }
 
@@ -124,7 +120,7 @@ class List extends React.Component {
 function mapStateToProps({movie}){
   return {
     list: movie.get('list'),
-    loading: false
+    loading: movie.get('loading')
   }
 }
 
