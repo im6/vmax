@@ -13,6 +13,15 @@ class Box extends React.Component {
 
   componentWillUnmount() {
   }
+  
+  onPlay(url){
+    let me = this;
+    me.props.onPlay(url);
+  }
+  onOpen(url){
+    let me = this;
+    me.props.onOpen(url);
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     let me = this;
@@ -35,9 +44,26 @@ class Box extends React.Component {
         </div> : <div className={style.imgHolder}></div>
       }
       <br/>
-      <Button type="primary">Open</Button>
-      <Button type="primary">Open</Button>
-      <Button type="primary">Open</Button>
+      {
+        me.props.detail.get('m').map((v, k) => {
+          return <Button
+            key={k}
+            style={{marginRight: 8}}
+            onClick={me.onPlay.bind(me, me.props.detail.get('r') + '/' + v)}
+            icon="caret-right"
+            type="primary">
+            Play ({k})
+          </Button>
+        })
+      }
+      
+      &nbsp;&nbsp;
+      <Button
+        onClick={me.onOpen.bind(me, me.props.detail.get('r'))}
+        icon="arrows-alt"
+        type="default">
+        View
+      </Button>
     </Card>;
   }
 }

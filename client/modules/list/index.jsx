@@ -31,12 +31,20 @@ class List extends React.Component {
     let me = this;
     me.isAnimating = nextProps.list.size != this.props.list.size;
   }
-  onLikeClickHandler(index, btnStatus){
+  
+  onOpen(url){
     let me = this;
-    const ac = createAction('color/toggleLike');
+    const ac = createAction('movie/open');
     me.props.dispatch(ac({
-      ...btnStatus,
-      index
+      url
+    }));
+  }
+  
+  onPlay(url){
+    let me = this;
+    const ac = createAction('movie/play');
+    me.props.dispatch(ac({
+      url
     }));
   }
 
@@ -55,21 +63,6 @@ class List extends React.Component {
     }
   };
 
-  getBoxWidth(){
-    let me = this;
-    let result = 0;
-    let w = window.innerWidth;
-    if(w >= 1200){
-      result = 72;
-    }else if(w >= 992){
-      result = 80;
-    }else if(w >= 768){
-      result = 80;
-    }else {
-      result = 92;
-    }
-    return result;
-  }
 
   onAnimEnd(endKey, type){
     let me = this;
@@ -83,10 +76,7 @@ class List extends React.Component {
 
   render() {
     let me = this;
-    let boxW = me.getBoxWidth();
-    let listClass = {},
-      im = me.props.isMobile;
-    listClass[style.pcPadding] = !im;
+    let listClass = {};
     listClass[style.list] = true;
     let clsStr = classnames(listClass);
 
@@ -118,7 +108,10 @@ class List extends React.Component {
                          lg={12}
                          key={k}
                          className={style.colContainer}>
-              <Box detail={v}/>
+              <Box
+                onOpen={me.onOpen.bind(me)}
+                onPlay={me.onPlay.bind(me)}
+                detail={v}/>
             </Col>);
           })
         }

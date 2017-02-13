@@ -6,8 +6,31 @@ import { createAction } from 'redux-actions';
 function* watchers(a) {
   yield [
     takeLatest("movie/get", getMovies),
+    takeLatest("movie/open", openMovies),
+    takeLatest("movie/play", playMovies),
   ]
 }
+
+function* openMovies(action) {
+  try {
+    yield call(requester, '/action/open', {
+      url: action.payload.url
+    });
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+function* playMovies(action) {
+  try {
+    yield call(requester, '/action/play', {
+      url: action.payload.url
+    });
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 
 function* getMovies(action) {
   try {

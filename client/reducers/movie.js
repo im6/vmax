@@ -31,6 +31,13 @@ const movie = handleActions({
       type: 'latest'
     });
   },
+  
+  ['movie/play'](state, action) {
+    return state;
+  },
+  ['movie/open'](state, action) {
+    return state;
+  },
 
 }, Immutable.fromJS({
   list: [],

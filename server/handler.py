@@ -2,6 +2,7 @@ import tornado.web
 import os
 import csv
 import json
+import subprocess
 from urlparse import urlparse
 
 class mainHandler(tornado.web.RequestHandler):
@@ -27,7 +28,7 @@ class movieHandler(tornado.web.RequestHandler):
                 list.append(oneRow)
 
         list.pop(0)
-        self.write(json.dumps(list[100:200]))
+        self.write(json.dumps(list))
 
 class resourceHandler(tornado.web.RequestHandler):
     def get(self, rsc):
@@ -37,6 +38,20 @@ class resourceHandler(tornado.web.RequestHandler):
             # self.set_header('Content-Type', 'image/jpg')
             self.write(file.read())
             file.close()
+        except Exception as e:
+            print('===========  file location error =============')
+            print(rsc)
+            print('==============================================')
+            self.write('null')
+
+
+class actionHandler(tornado.web.RequestHandler):
+    def post(self, rsc):
+        try:
+            bodyData = tornado.escape.json_decode(self.request.body)
+            url = bodyData['url']
+            subprocess.call(['open', url])
+            self.write({'status': 'ok'})
         except Exception as e:
             print('===========  file location error =============')
             print(rsc)
