@@ -27,7 +27,7 @@ const movie = handleActions({
   ['movie/get/success'](state, action) {
     return state.merge({
       loading: true,
-      list: [],
+      list: action.payload,
       type: 'latest'
     });
   },

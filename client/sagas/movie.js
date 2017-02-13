@@ -11,7 +11,7 @@ function* watchers(a) {
 
 function* getMovies(action) {
   try {
-    const payload = yield call(requester, '/api/getmovie');
+    const payload = yield call(requester, '/movie/list');
     if(payload.error){
       yield put({
         type: "movie/get/fail",
@@ -20,7 +20,7 @@ function* getMovies(action) {
     }else{
       yield put({
         type: "movie/get/success",
-        payload: payload.result
+        payload: payload
       });
     }
   } catch (e) {

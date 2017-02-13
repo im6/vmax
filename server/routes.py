@@ -1,11 +1,10 @@
 import os
 import tornado.web
-from server.handler import mainHandler, main2Handler
+from server.handler import mainHandler, movieHandler, resourceHandler
 
-STATICPATH = os.path.join("../", "public")
-print STATICPATH
 routes = [
     (r"/", mainHandler),
-    (r"/get", main2Handler),
-    (r'/', tornado.web.StaticFileHandler, {'path': '/public'})
+    (r"/movie/(.*)", movieHandler),
+    (r"/resource/(.*)", resourceHandler),
+    (r"/(.*)", tornado.web.StaticFileHandler, {'path': os.path.join(os.getcwd(), 'public')}),
 ]

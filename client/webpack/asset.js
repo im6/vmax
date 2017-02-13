@@ -112,7 +112,7 @@ var plugins = {
   ],
   watch: [
     new HtmlWebpackPlugin({
-      title: 'ZJ Guo',
+      title: 'VMAX',
       template: 'client/template/index.html',
       hash:true,
       showErrors: false
@@ -137,7 +137,7 @@ var plugins = {
       }
     }),
     new HtmlWebpackPlugin({
-      title: 'ZJ Guo',
+      title: 'VMAX',
       template: 'client/template/index.html',
       favicon: './client/content/img/favicon.ico',
       hash:true,

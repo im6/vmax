@@ -14,7 +14,7 @@ Object.assign(baseTemplate, {
   entry: asset.entry("watch"),
   devtool: 'eval',
   output: {
-    path: path.join(__dirname, '../temp'),
+    path: path.join(__dirname, '../../public'),
     filename: 'app.js'
   }
 });

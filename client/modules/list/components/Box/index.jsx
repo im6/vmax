@@ -21,11 +21,23 @@ class Box extends React.Component {
 
   render() {
     let me = this;
+    
+    let imgName = me.props.detail.getIn(['im', '0']);
+    let imgUrl = imgName ? '/resource' + me.props.detail.get('r') + '/' + imgName : null;
+
     return <Card
-      title={me.props.detail.get('c') + '-' + me.props.detail.get('i')}
+      title={<h3>{me.props.detail.get('c') + '-' + me.props.detail.get('i')}</h3>}
       className={style.box}
     >
-      <img src={me.props.detail.get('im')} alt="no image"/>
+      {
+        imgUrl ? <div className={style.imageContainer}>
+          <img src={imgUrl} alt="no image"/>
+        </div> : <div className={style.imgHolder}></div>
+      }
+      <br/>
+      <Button type="primary">Open</Button>
+      <Button type="primary">Open</Button>
+      <Button type="primary">Open</Button>
     </Card>;
   }
 }
