@@ -8,7 +8,6 @@ import EventListener, {withOptions} from 'react-event-listener';
 import debounce from 'debounce';
 
 import Box from './components/Box';
-import SpinLoader from './components/SpinLoader';
 
 import style from './style.less';
 
@@ -112,7 +111,6 @@ class List extends React.Component {
           })
         }
       </QueueAnim>
-      { me.props.loading ? <SpinLoader /> : <div style={{height: 60}}/> }
     </div>
   }
 }

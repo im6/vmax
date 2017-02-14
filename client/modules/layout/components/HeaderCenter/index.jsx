@@ -7,8 +7,12 @@ import { Link } from 'react-router';
 import style from './style.less';
 
 
-const HeaderCenter = ({isNavBtnActive, onRefresh, isLoading}) => {
-
+const HeaderCenter = ({isNavBtnActive, onRefresh, 
+  onReturn,
+  onDup, 
+  isLoading, 
+  viewType
+}) => {
 
   return <header className={style.header}>
     <Row>
@@ -22,6 +26,22 @@ const HeaderCenter = ({isNavBtnActive, onRefresh, isLoading}) => {
           type={isLoading? 'default': 'primary'}>          
           {isLoading ? <Spin spinning={isLoading}/> : 'Refresh'} 
         </Button>
+        &nbsp;&nbsp;
+        {
+          viewType === 'dup' ?
+            <Button
+              onClick={onReturn}
+              icon="arrow-left"
+              type={'default'}>
+              Return
+            </Button> :
+            <Button
+              onClick={onDup}
+              type={'default'}>
+              Check Dup
+            </Button>
+        }
+
       </Col>
 
       <Col lg={4} md={5} sm={6} xs={0}/>

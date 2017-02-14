@@ -77,6 +77,16 @@ class Layout extends React.Component {
     const ac = createAction('movie/refresh');
     me.props.dispatch(ac());
   }
+  onDup(){
+    let me = this;
+    const ac = createAction('movie/dup');
+    me.props.dispatch(ac());
+  }
+  onReturn(){
+    let me = this;
+    const ac = createAction('movie/dup/return');
+    me.props.dispatch(ac());
+  }
 
   render() {
     let me = this;
@@ -93,8 +103,11 @@ class Layout extends React.Component {
       <main ref="panel">
         <HeaderCenter
           onRefresh={me.onRefresh.bind(me)}
+          onDup={me.onDup.bind(me)}
           isNavBtnActive={me.state.isMenuView}
           isLoading={me.props.isLoading}
+          viewType={me.props.viewType}
+          onReturn={me.onReturn.bind(me)}
         />
         <div
           className={styles.main}
@@ -119,6 +132,7 @@ Layout.propTypes = {
 function mapStateToProps({routing, movie}){
   return {
     isLoading: movie.get('loading'),
+    viewType: movie.get('type'),
     currentPath: routing.locationBeforeTransitions.pathname
   }
 }

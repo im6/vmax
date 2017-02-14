@@ -55,6 +55,29 @@ const movie = handleActions({
     });
   },
 
+  ['movie/dup'](state, action) {
+    return state.merge({
+      loading: true,
+    });
+  },
+
+  ['movie/dup/success'](state, action) {
+    return state.merge({
+      loading: false,
+      list: action.payload,
+      type: 'dup'
+    });
+  },
+
+  ['movie/dup/return'](state, action) {
+    return state.merge({
+      loading: false,
+      list: getNewList(),
+      type: null
+    });
+  },
+  
+
 }, Immutable.fromJS({
   list: [],
   loading: true,

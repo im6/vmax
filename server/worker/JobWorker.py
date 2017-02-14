@@ -33,8 +33,6 @@ class JobWorker:
         walker = FileWalker(paths)
         list = walker.getList()
 
-        print("generating the duplication list: ")
-
         result = []
         end = len(list) - 1
 
@@ -43,6 +41,7 @@ class JobWorker:
                 result.append(oneItem)
                 result.append(list[oneIndex + 1])
 
+        print('generate dup result successfully!')
         return result;
 
     @staticmethod

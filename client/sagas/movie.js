@@ -8,11 +8,25 @@ function* watchers(a) {
     takeLatest("movie/get", getMovies),
     takeLatest("movie/open", openMovies),
     takeLatest("movie/play", playMovies),
-    takeLatest("movie/refresh", playRefresh),
+    takeLatest("movie/refresh", workerRefresh),
+    takeLatest("movie/dup", workerDup),
   ]
 }
 
-function* playRefresh(action) {
+function* workerDup(action) {
+  try {
+    const payload = yield call(requester, '/worker/dup');
+    yield put({
+        type: "movie/dup/success",
+        payload: payload.data
+      });
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+
+function* workerRefresh(action) {
   try {
     const payload = yield call(requester, '/worker/refresh');
     yield put({
