@@ -113,8 +113,8 @@ var plugins = {
   watch: [
     new HtmlWebpackPlugin({
       title: 'VMAX',
-      template: 'client/template/index.html',
-      hash:true,
+      template: './client/template/index.html',
+      favicon: './client/content/img/favicon2.ico',
       showErrors: false
     }),
     commonsChunk,
@@ -139,14 +139,8 @@ var plugins = {
     new HtmlWebpackPlugin({
       title: 'VMAX',
       template: 'client/template/index.html',
-      favicon: './client/content/img/favicon.ico',
+      favicon: './client/content/img/favicon2.ico',
       hash:true,
-      showErrors: false
-    }),
-    new HtmlWebpackPlugin({
-      template: 'client/template/error.html',
-      filename: 'error.html',
-      inject: false,
       showErrors: false
     }),
     commonsChunk

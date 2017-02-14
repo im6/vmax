@@ -1,7 +1,7 @@
 import tornado.ioloop
 from server.routes import routes
 
-PORT = 3000
+PORT = 5000
 
 if __name__ == "__main__":
     app = tornado.web.Application(routes)
