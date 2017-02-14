@@ -1,30 +1,12 @@
 import tornado.web
 import os
-import csv
 import json
 import subprocess
 from urlparse import urlparse
+from worker.UtilService import UtilService
 from worker.JobWorker import JobWorker
 
-def map_list_item(row):
-    oneRow = {
-        'r': row[0],
-        'm': row[1].split('|-|'),
-        'c': row[2],
-        'i': row[3],
-        'im': row[4].split('|-|') if len(row[4]) > 0 else []
-    }
-    return oneRow
 
-def csv_to_list():
-    list = []
-    with open(os.path.join(os.getcwd(), 'REPORT.csv'), 'rb') as f:
-        reader = csv.reader(f)
-        for row in reader:
-            oneRow = map_list_item(row)
-            list.append(oneRow)
-    list.pop(0)
-    return list
 
 class mainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -34,7 +16,7 @@ class mainHandler(tornado.web.RequestHandler):
 
 class movieHandler(tornado.web.RequestHandler):
     def post(self, a):
-        list = csv_to_list()
+        list = UtilService.csv_to_list()
         self.write(json.dumps(list))
 
 class resourceHandler(tornado.web.RequestHandler):
@@ -70,7 +52,7 @@ class workerHandler(tornado.web.RequestHandler):
     def post(self, rsc):
         if rsc == 'refresh':
             JobWorker.do_csv()
-            list = csv_to_list()
+            list = UtilService.csv_to_list()
             self.write(json.dumps({
                 'data': list
             }))
@@ -89,10 +71,21 @@ class workerHandler(tornado.web.RequestHandler):
             try:
                 bodyData = tornado.escape.json_decode(self.request.body)
                 keyword = bodyData['keyword']
-                filter_data = JobWorker.do_filter(keyword)
+                filter_data = []
+
+                search_type = UtilService.getKeywordType(keyword)
+                print('search type: %s' %(search_type))
+                if search_type == 0:
+                    filter_data = JobWorker.do_filter_0(keyword)
+                elif search_type == 1:
+                    filter_data = JobWorker.do_filter_1(keyword)
+                elif search_type == 2:
+                    filter_data = JobWorker.do_filter_2(keyword)
+
                 for one in filter_data:
                     one['im'] = one['im'].split('|-|') if len(one['im']) > 0 else []
                     one['m'] = one['m'].split('|-|')
+
                 self.write(json.dumps({
                     'data': filter_data
                 }))

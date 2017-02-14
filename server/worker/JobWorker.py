@@ -2,7 +2,6 @@ from server.worker.worker_service.FileWalker import FileWalker
 from server.worker.worker_service.CsvWriter import CsvWriter
 from local.constant_var import paths
 
-
 class JobWorker:
     def __init__(self):
         pass
@@ -45,12 +44,45 @@ class JobWorker:
         return result;
 
     @staticmethod
-    def do_filter(keyword):
-        walker = FileWalker(paths)
-        list = walker.getList()
+    def parse_name(str):
+        alpha_start = False
+        id_start = False
+        result = ['', '']
 
-        result = filter(lambda x: keyword.lower() in x['c'] or keyword.lower() in x['i'], list)
+        for key, v in enumerate(str):
+            if v.isalpha():
+                alpha_start = True
+            if alpha_start and v.isdigit():
+                id_start = True
+
+            if id_start:
+                result[1] += v
+            else:
+                result[0] += v.lower()
 
         return result
+
+    @staticmethod
+    def do_filter_0(keyword):
+        walker = FileWalker(paths)
+        list = walker.getList()
+        result = filter(lambda x: keyword.lower() in x['c'] or keyword.lower() in x['i'], list)
+        return result
+
+    @staticmethod
+    def do_filter_1(keyword):
+        walker = FileWalker(paths)
+        list = walker.getList()
+        sku = JobWorker.parse_name(keyword)
+        result = filter(lambda x: sku[0] in x['c'] and sku[1] in x['i'], list)
+        return result
+
+    @staticmethod
+    def do_filter_2(keyword):
+        walker = FileWalker(paths)
+        list = walker.getList()
+        result = filter(lambda x: keyword.lower() in x['r'] or keyword.lower() in x['m'], list)
+        return result
+
 
 
