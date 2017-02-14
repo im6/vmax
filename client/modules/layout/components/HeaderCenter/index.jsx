@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Row, Col, Menu, Icon, Button, Dropdown } from 'antd';
+import { Row, Col, Menu, Icon, Button, Spin } from 'antd';
 
 import MenuButton from './components/MenuButton';
 
@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 import style from './style.less';
 
 
-const HeaderCenter = ({isNavBtnActive}) => {
+const HeaderCenter = ({isNavBtnActive, onRefresh, isLoading}) => {
 
 
   return <header className={style.header}>
@@ -17,14 +17,14 @@ const HeaderCenter = ({isNavBtnActive}) => {
 
         <MenuButton isNavBtnActive={isNavBtnActive}/>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <Button type="default" icon="home">
-            Refresh
+        <Button 
+          onClick={onRefresh}
+          type={isLoading? 'default': 'primary'}>          
+          {isLoading ? <Spin spinning={isLoading}/> : 'Refresh'} 
         </Button>
       </Col>
 
-      <Col lg={4} md={5} sm={6} xs={0}>
-      </Col>
-
+      <Col lg={4} md={5} sm={6} xs={0}/>
     </Row>
   </header>;
 };

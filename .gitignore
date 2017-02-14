@@ -4,4 +4,3 @@ env/
 npm-debug.log
 REPORT.csv
 public/
-!public/index.html

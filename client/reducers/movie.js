@@ -49,6 +49,12 @@ const movie = handleActions({
     return state;
   },
 
+  ['movie/refresh'](state, action) {
+    return state.merge({
+      loading: true,
+    });
+  },
+
 }, Immutable.fromJS({
   list: [],
   loading: true,

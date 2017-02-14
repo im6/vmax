@@ -8,7 +8,20 @@ function* watchers(a) {
     takeLatest("movie/get", getMovies),
     takeLatest("movie/open", openMovies),
     takeLatest("movie/play", playMovies),
+    takeLatest("movie/refresh", playRefresh),
   ]
+}
+
+function* playRefresh(action) {
+  try {
+    const payload = yield call(requester, '/worker/refresh');
+    yield put({
+        type: "movie/get/success",
+        payload: payload.data
+      });
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 function* openMovies(action) {

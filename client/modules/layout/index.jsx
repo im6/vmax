@@ -71,6 +71,12 @@ class Layout extends React.Component {
   resizeHandler(ev) {
     let me = this;
   };
+  
+  onRefresh(){
+    let me = this;
+    const ac = createAction('movie/refresh');
+    me.props.dispatch(ac());
+  }
 
   render() {
     let me = this;
@@ -86,7 +92,9 @@ class Layout extends React.Component {
 
       <main ref="panel">
         <HeaderCenter
+          onRefresh={me.onRefresh.bind(me)}
           isNavBtnActive={me.state.isMenuView}
+          isLoading={me.props.isLoading}
         />
         <div
           className={styles.main}
@@ -108,8 +116,9 @@ Layout.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-function mapStateToProps({routing}){
+function mapStateToProps({routing, movie}){
   return {
+    isLoading: movie.get('loading'),
     currentPath: routing.locationBeforeTransitions.pathname
   }
 }

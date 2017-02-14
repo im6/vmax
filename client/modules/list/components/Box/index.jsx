@@ -25,7 +25,8 @@ class Box extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState){
     let me = this;
-    return true;
+    let isSame = (me.props.detail.get('c') + me.props.detail.get('i')) === (nextProps.detail.get('c') + nextProps.detail.get('i'));
+    return !isSame;
   }
 
   render() {
@@ -39,11 +40,23 @@ class Box extends React.Component {
       className={style.box}
     >
       {
-        imgUrl ? <div className={style.imageContainer}>
+        imgUrl ? <div 
+          onClick={me.onOpen.bind(me, me.props.detail.get('r'))} 
+          className={style.imageContainer}>
           <img src={imgUrl} alt="no image"/>
-        </div> : <div className={style.imgHolder}></div>
+        </div> : <div className={style.imgHolder}>
+          <h1>
+            <Icon type="meh-o" />
+            &nbsp;&nbsp;
+            No Image. &nbsp;
+            <a onClick={me.onOpen.bind(me, me.props.detail.get('r'))}>
+              Check
+            </a>
+          </h1>
+        </div>
       }
       <br/>
+
       {
         me.props.detail.get('m').map((v, k) => {
           return <Button
@@ -52,18 +65,13 @@ class Box extends React.Component {
             onClick={me.onPlay.bind(me, me.props.detail.get('r') + '/' + v)}
             icon="caret-right"
             type="primary">
-            Play ({k})
+            &nbsp;  {k+1}
           </Button>
         })
       }
       
-      &nbsp;&nbsp;
-      <Button
-        onClick={me.onOpen.bind(me, me.props.detail.get('r'))}
-        icon="arrows-alt"
-        type="default">
-        View
-      </Button>
+      
+      
     </Card>;
   }
 }
