@@ -49,7 +49,7 @@ class JobWorker:
         walker = FileWalker(paths)
         list = walker.getList()
 
-        result = filter(lambda x: keyword.lower() in x['m'].lower(), list)
+        result = filter(lambda x: keyword.lower() in x['c'] or keyword.lower() in x['i'], list)
 
         return result
 

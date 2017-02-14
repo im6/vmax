@@ -74,14 +74,7 @@ class workerHandler(tornado.web.RequestHandler):
             self.write(json.dumps({
                 'data': list
             }))
-        elif rsc == 'filter':
-            bodyData = tornado.escape.json_decode(self.request.body)
-            keyword = bodyData['keyword']
-            filter_data = JobWorker.do_filter(keyword)
-            self.write(json.dumps({
-                'result': filter_data
-            }))
-            return filter_data
+
         elif rsc == 'dup':
             dup_data = JobWorker.do_dup()
             for one in dup_data:
@@ -91,4 +84,21 @@ class workerHandler(tornado.web.RequestHandler):
             self.write(json.dumps({
                 'data': dup_data
             }))
+
+        elif rsc == 'filter':
+            try:
+                bodyData = tornado.escape.json_decode(self.request.body)
+                keyword = bodyData['keyword']
+                filter_data = JobWorker.do_filter(keyword)
+                for one in filter_data:
+                    one['im'] = one['im'].split('|-|') if len(one['im']) > 0 else []
+                    one['m'] = one['m'].split('|-|')
+                self.write(json.dumps({
+                    'data': filter_data
+                }))
+            except Exception as e:
+                print(e)
+                self.write(json.dumps({
+                    'data': []
+                }))
 

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Row, Col, Menu, Icon, Button, Spin } from 'antd';
+import { Row, Col, Menu, Icon, Button, Spin, Input } from 'antd';
+const Search = Input.Search;
 
 import MenuButton from './components/MenuButton';
 
@@ -10,6 +11,7 @@ import style from './style.less';
 const HeaderCenter = ({isNavBtnActive, onRefresh, 
   onReturn,
   onDup, 
+  onSearch,
   isLoading, 
   viewType
 }) => {
@@ -28,7 +30,7 @@ const HeaderCenter = ({isNavBtnActive, onRefresh,
         </Button>
         &nbsp;&nbsp;
         {
-          viewType === 'dup' ?
+          viewType ?
             <Button
               onClick={onReturn}
               icon="arrow-left"
@@ -41,6 +43,14 @@ const HeaderCenter = ({isNavBtnActive, onRefresh,
               Check Dup
             </Button>
         }
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <Search
+          placeholder="search movie"
+          style={{ width: 400 }}
+          size="large"
+          onSearch={onSearch}
+        />
 
       </Col>
 

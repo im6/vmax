@@ -49,8 +49,8 @@ class List extends React.Component {
 
   scrollHandler(st, ev) {
     let me = this;
-    let isloading = me.props.loading;
-    if(isloading || me.isAnimating){
+
+    if(me.props.loading || me.isAnimating || me.props.type){
       return false;
     }
 
@@ -118,7 +118,8 @@ class List extends React.Component {
 function mapStateToProps({movie}){
   return {
     list: movie.get('list'),
-    loading: movie.get('loading')
+    loading: movie.get('loading'),
+    type: movie.get('type')
   }
 }
 

@@ -69,7 +69,7 @@ const movie = handleActions({
     });
   },
 
-  ['movie/dup/return'](state, action) {
+  ['movie/return'](state, action) {
     return state.merge({
       loading: false,
       list: getNewList(),
@@ -77,6 +77,26 @@ const movie = handleActions({
     });
   },
   
+  ['movie/search'](state, action) {
+    return state.merge({
+      loading: true
+    });
+  },
+  
+  ['movie/search/success'](state, action) {
+    if(action.payload.length === 0){
+      message.warning('No result.');
+      return state.merge({
+        loading: false
+      });     
+    }else{
+      return state.merge({
+        loading: false,
+        list: action.payload,
+        type: 'search'
+      });      
+    }
+  },  
 
 }, Immutable.fromJS({
   list: [],

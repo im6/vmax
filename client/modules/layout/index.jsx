@@ -84,8 +84,16 @@ class Layout extends React.Component {
   }
   onReturn(){
     let me = this;
-    const ac = createAction('movie/dup/return');
+    const ac = createAction('movie/return');
     me.props.dispatch(ac());
+  }
+  onSearch(r){
+    let me = this;
+    const ac = createAction('movie/search');
+    me.props.dispatch(ac({
+      keyword:r
+    }));
+    
   }
 
   render() {
@@ -108,6 +116,7 @@ class Layout extends React.Component {
           isLoading={me.props.isLoading}
           viewType={me.props.viewType}
           onReturn={me.onReturn.bind(me)}
+          onSearch={me.onSearch.bind(me)}
         />
         <div
           className={styles.main}

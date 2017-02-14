@@ -10,7 +10,20 @@ function* watchers(a) {
     takeLatest("movie/play", playMovies),
     takeLatest("movie/refresh", workerRefresh),
     takeLatest("movie/dup", workerDup),
+    takeLatest("movie/search", workerSearch),
   ]
+}
+
+function* workerSearch(action) {
+  try {
+    const payload = yield call(requester, '/worker/filter', action.payload);
+    yield put({
+        type: "movie/search/success",
+        payload: payload.data
+      });
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 function* workerDup(action) {
