@@ -67,6 +67,11 @@ class workerHandler(tornado.web.RequestHandler):
                 'data': dup_data
             }))
 
+        elif rsc == 'imgpair':
+            result = JobWorker.do_pair()
+            self.write(json.dumps({
+                'data': result
+            }))
         elif rsc == 'filter':
             try:
                 bodyData = tornado.escape.json_decode(self.request.body)

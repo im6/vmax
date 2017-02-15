@@ -13,6 +13,7 @@ const HeaderCenter = ({isNavBtnActive, onRefresh,
   onDup, 
   onSearch,
   isLoading, 
+  onImgPair,
   viewType
 }) => {
 
@@ -28,6 +29,13 @@ const HeaderCenter = ({isNavBtnActive, onRefresh,
           type={isLoading? 'default': 'primary'}>          
           {isLoading ? <Spin spinning={isLoading}/> : 'Refresh'} 
         </Button>
+        &nbsp;&nbsp;
+        <Button
+          onClick={onImgPair}
+          type="primary"
+          icon="file-add"
+        />
+        
         &nbsp;&nbsp;
         {
           viewType ?

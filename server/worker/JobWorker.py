@@ -1,6 +1,7 @@
 from server.worker.worker_service.FileWalker import FileWalker
 from server.worker.worker_service.CsvWriter import CsvWriter
-from local.constant_var import paths
+from local.constant_var import paths, img_temp
+import os
 
 class JobWorker:
     def __init__(self):
@@ -44,7 +45,10 @@ class JobWorker:
         return result;
 
     @staticmethod
-    def parse_name(str):
+    def parse_name(rawstr):
+        if not rawstr[0].isalpha():
+            return None
+        str = rawstr.replace('-','')
         alpha_start = False
         id_start = False
         result = ['', '']
@@ -54,6 +58,8 @@ class JobWorker:
                 alpha_start = True
             if alpha_start and v.isdigit():
                 id_start = True
+            if id_start and not v.isdigit():
+                break
 
             if id_start:
                 result[1] += v
@@ -61,6 +67,34 @@ class JobWorker:
                 result[0] += v.lower()
 
         return result
+
+    @staticmethod
+    def do_pair():
+        walker0 = FileWalker(paths)
+        fileList = walker0.getList()
+        img_list = []
+        map_list = []
+        for root, dirs, files in os.walk(img_temp):
+            for onename in files:
+                parse_name_result = JobWorker.parse_name(onename)
+                if parse_name_result:
+                    img_list.append({
+                        'c': parse_name_result[0],
+                        'i': parse_name_result[1],
+                        'oa': onename
+                    })
+
+        for one_parse in img_list:
+            matched = False
+            dictItem = None
+            for oneFile in fileList:
+                if oneFile['i'] == one_parse['i'] and oneFile['c'] == one_parse['c']:
+                    matched = True
+                    dictItem = oneFile
+            if matched:
+                map_list.append({'img':one_parse['oa'], 'target': dictItem['r']})
+
+        return map_list
 
     @staticmethod
     def do_filter_0(keyword):

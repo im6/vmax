@@ -8,3 +8,5 @@ company_exception = [
     '1pondo',
     '1000giri',
 ]
+
+img_temp = '/Users/ZJ/Desktop/temp'

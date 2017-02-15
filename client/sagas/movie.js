@@ -11,7 +11,20 @@ function* watchers(a) {
     takeLatest("movie/refresh", workerRefresh),
     takeLatest("movie/dup", workerDup),
     takeLatest("movie/search", workerSearch),
+    takeLatest("movie/imgpair", workerImgPair),
   ]
+}
+
+function* workerImgPair(action) {
+  try {
+    const payload = yield call(requester, '/worker/imgpair');
+    yield put({
+        type: "movie/imgpair/success",
+        payload: payload.data
+      });
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 function* workerSearch(action) {

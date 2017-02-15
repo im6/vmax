@@ -96,7 +96,27 @@ const movie = handleActions({
         type: 'search'
       });      
     }
-  },  
+  }, 
+
+  ['movie/imgpair'](state, action) {
+    return state.merge({
+      loading: true
+    });
+  },
+  ['movie/imgpair/success'](state, action) {
+    var result = action.payload;    
+    message.success('pair successfully: ' + result.length);    
+    console.log('=====================');
+    var txt = 'no match.';
+    if(result.length > 0){
+      txt = result
+    }
+    console.log(txt);
+    console.log('=====================');
+    return state.merge({
+      loading: false
+    });
+  },
 
 }, Immutable.fromJS({
   list: [],
