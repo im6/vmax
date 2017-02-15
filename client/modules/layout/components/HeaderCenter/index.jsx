@@ -32,8 +32,8 @@ const HeaderCenter = ({isNavBtnActive, onRefresh,
         &nbsp;&nbsp;
         <Button
           onClick={onImgPair}
-          type="primary"
-          icon="file-add"
+          type="default"
+          icon="picture"
         />
         
         &nbsp;&nbsp;

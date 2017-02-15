@@ -56,7 +56,7 @@ function* workerRefresh(action) {
   try {
     const payload = yield call(requester, '/worker/refresh');
     yield put({
-        type: "movie/get/success",
+        type: "movie/refresh/success",
         payload: payload.data
       });
   } catch (e) {

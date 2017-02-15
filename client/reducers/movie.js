@@ -55,6 +55,14 @@ const movie = handleActions({
     });
   },
 
+  ['movie/refresh/success'](state, action) {
+    message.success('Refresh successfully!');
+    totalMovie = action.payload;
+    return state.merge({
+      loading: false,
+      list: getNewList()
+    });
+  },
   ['movie/dup'](state, action) {
     return state.merge({
       loading: true,

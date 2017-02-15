@@ -1,5 +1,6 @@
 from server.worker.worker_service.FileWalker import FileWalker
 from server.worker.worker_service.CsvWriter import CsvWriter
+from server.worker.UtilService import UtilService
 from local.constant_var import paths, img_temp
 import os
 
@@ -30,9 +31,7 @@ class JobWorker:
 
     @staticmethod
     def do_dup():
-        walker = FileWalker(paths)
-        list = walker.getList()
-
+        list = UtilService.csv_to_list()
         result = []
         end = len(list) - 1
 
@@ -42,7 +41,7 @@ class JobWorker:
                 result.append(list[oneIndex + 1])
 
         print('generate dup result successfully!')
-        return result;
+        return result
 
     @staticmethod
     def parse_name(rawstr):
@@ -70,8 +69,7 @@ class JobWorker:
 
     @staticmethod
     def do_pair():
-        walker0 = FileWalker(paths)
-        fileList = walker0.getList()
+        fileList = UtilService.csv_to_list()
         img_list = []
         map_list = []
         for root, dirs, files in os.walk(img_temp):
@@ -97,25 +95,30 @@ class JobWorker:
         return map_list
 
     @staticmethod
-    def do_filter_0(keyword):
-        walker = FileWalker(paths)
-        list = walker.getList()
-        result = filter(lambda x: keyword.lower() in x['c'] or keyword.lower() in x['i'], list)
-        return result
-
-    @staticmethod
-    def do_filter_1(keyword):
-        walker = FileWalker(paths)
-        list = walker.getList()
+    def do_filter_1(keyword0):
+        list = UtilService.csv_to_list()
+        keyword = keyword0.encode('utf-8')
         sku = JobWorker.parse_name(keyword)
         result = filter(lambda x: sku[0] in x['c'] and sku[1] in x['i'], list)
         return result
 
     @staticmethod
-    def do_filter_2(keyword):
-        walker = FileWalker(paths)
-        list = walker.getList()
-        result = filter(lambda x: keyword.lower() in x['r'] or keyword.lower() in x['m'], list)
+    def do_filter_2(keyword0):
+        keyword = keyword0.encode('utf-8')
+        list = UtilService.csv_to_list()
+        result = []
+        for one_item in list:
+            try:
+                keyInMovie = False
+                for onemovie in one_item['m']:
+                    if keyword in onemovie:
+                        keyInMovie = True
+                if keyword in one_item['r'].lower() or keyInMovie:
+                    result.append(one_item)
+            except Exception as e:
+                print(one_item['r'])
+                print(one_item['m'])
+
         return result
 
 

@@ -7,7 +7,6 @@ from worker.UtilService import UtilService
 from worker.JobWorker import JobWorker
 
 
-
 class mainHandler(tornado.web.RequestHandler):
     def get(self):
         view_path = os.path.join("../public", 'index.html')
@@ -59,10 +58,6 @@ class workerHandler(tornado.web.RequestHandler):
 
         elif rsc == 'dup':
             dup_data = JobWorker.do_dup()
-            for one in dup_data:
-                one['im'] = one['im'].split('|-|') if len(one['im']) > 0 else []
-                one['m'] = one['m'].split('|-|')
-
             self.write(json.dumps({
                 'data': dup_data
             }))
@@ -80,16 +75,10 @@ class workerHandler(tornado.web.RequestHandler):
 
                 search_type = UtilService.getKeywordType(keyword)
                 print('search type: %s' %(search_type))
-                if search_type == 0:
-                    filter_data = JobWorker.do_filter_0(keyword)
+                if search_type == 0 or search_type == 2:
+                    filter_data = JobWorker.do_filter_2(keyword)
                 elif search_type == 1:
                     filter_data = JobWorker.do_filter_1(keyword)
-                elif search_type == 2:
-                    filter_data = JobWorker.do_filter_2(keyword)
-
-                for one in filter_data:
-                    one['im'] = one['im'].split('|-|') if len(one['im']) > 0 else []
-                    one['m'] = one['m'].split('|-|')
 
                 self.write(json.dumps({
                     'data': filter_data
