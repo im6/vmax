@@ -29,7 +29,8 @@ const movie = handleActions({
     });
   },
   ['movie/get/success'](state, action) {
-    totalMovie = action.payload;
+    totalMovie = action.payload.filter((v,k) => k > 1585);
+    //totalMovie = action.payload;
     return state.merge({
       loading: false,
       list: getNewList()
