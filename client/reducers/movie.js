@@ -29,8 +29,8 @@ const movie = handleActions({
     });
   },
   ['movie/get/success'](state, action) {
-    totalMovie = action.payload.filter((v,k) => k > 1585);
-    //totalMovie = action.payload;
+    //totalMovie = action.payload.filter((v,k) => v.im.length < 1);
+    totalMovie = action.payload;
     return state.merge({
       loading: false,
       list: getNewList()
