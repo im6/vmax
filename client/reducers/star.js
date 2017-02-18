@@ -21,26 +21,11 @@ const movie = handleActions({
       name: action.payload,
       loading: false
     });
-  },
-  
-  ['star/getMovie'](state, action) {
-    
-  },
-  
-  ['star/getMovie/success'](state, action) {
-    
-  },
-  
-  ['star/getMovie/fail'](state, action) {
-    
-  },
-  
+  }, 
   
 
 }, Immutable.fromJS({
   name: [],
-  loading: true,
-  movie: []
 }));
 
 export default movie;

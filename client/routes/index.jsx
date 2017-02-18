@@ -6,7 +6,6 @@ import { Global } from '../config/global';
 
 import App from '../modules/app/index.jsx';
 import List from '../modules/list';
-import Star from '../modules/Star';
 
 const Routes = ({ history, store }) => {
 

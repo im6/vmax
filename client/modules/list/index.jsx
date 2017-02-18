@@ -6,6 +6,7 @@ import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import EventListener, {withOptions} from 'react-event-listener';
 import debounce from 'debounce';
+import StarGroup from './components/StarGroup'
 
 import Box from './components/Box';
 
@@ -44,6 +45,14 @@ class List extends React.Component {
     const ac = createAction('movie/play');
     me.props.dispatch(ac({
       url
+    }));
+  }
+
+  onNameClick(name){
+    let me = this;
+    const ac = createAction('movie/starFilter');
+    me.props.dispatch(ac({
+      name
     }));
   }
 
@@ -89,6 +98,12 @@ class List extends React.Component {
             />:
           null
       }
+      <Row>
+        <Col lg={24}>
+          <StarGroup onClick={me.onNameClick.bind(me)} list={me.props.name} />
+        </Col>
+      </Row>
+      
 
       <QueueAnim type="top"
                  onEnd={me.onAnimEnd.bind(me, endKey)}
@@ -115,11 +130,12 @@ class List extends React.Component {
   }
 }
 
-function mapStateToProps({movie}){
+function mapStateToProps({movie, star}){
   return {
     list: movie.get('list'),
     loading: movie.get('loading'),
-    type: movie.get('type')
+    type: movie.get('type'),
+    name: star.get('name')
   }
 }
 

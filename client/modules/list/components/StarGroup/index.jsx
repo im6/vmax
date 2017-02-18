@@ -36,7 +36,13 @@ class StarGroup extends React.Component {
 
     return <Card className={style.container}>
       {
-        list.map((v,k) => <Tag color={colors[k % COLORLENGTH]}>{v}</Tag>)
+        list.map((v,k) => <Tag 
+          className={style.oneTag}
+          key={k} 
+          onClick={me.props.onClick.bind(me.props, v)}
+          color={colors[k % COLORLENGTH]}>
+          {v}
+        </Tag>)
       }
     </Card>
   }

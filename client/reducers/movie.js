@@ -18,6 +18,17 @@ let getNewList = () => {
 };
 
 const movie = handleActions({
+  
+  ['movie/starFilter'](state, action) {
+    let name = action.payload.name;
+    let filtered = totalMovie.filter(v => {
+      return v.r.indexOf(name) > -1;
+    });
+    return state.merge({
+      list: filtered,
+      type: 'star'
+    });
+  },
   ['movie/get'](state, action) {
     return state.merge({
       loading: true
