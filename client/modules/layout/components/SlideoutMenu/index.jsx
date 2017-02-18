@@ -52,11 +52,11 @@ class SlideoutMenu extends React.Component {
             </Link>
           </Menu.Item>
 
-          <Menu.Item key="latest">
-            <Link to="/latest">
+          <Menu.Item key="star">
+            <Link to="/star">
               <h3>
                 <Icon type="clock-circle-o" />
-                Latest
+                Star
               </h3>
             </Link>
 

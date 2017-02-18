@@ -62,6 +62,12 @@ class workerHandler(tornado.web.RequestHandler):
                 'data': dup_data
             }))
 
+        elif rsc == 'star':
+            dup_data = JobWorker.do_star()
+            self.write(json.dumps({
+                'data': dup_data
+            }))
+
         elif rsc == 'imgpair':
             result = JobWorker.do_pair()
             self.write(json.dumps({

@@ -1,13 +1,21 @@
 from server.worker.worker_service.FileWalker import FileWalker
 from server.worker.worker_service.CsvWriter import CsvWriter
 from server.worker.UtilService import UtilService
-from local.constant_var import paths, img_temp
+from local.constant_var import paths, img_temp, star_path
 import os
 
 class JobWorker:
     def __init__(self):
         pass
 
+    @staticmethod
+    def do_star():
+        result = []
+        for root, dirs, files in os.walk(star_path):
+            if not result:
+                result = dirs
+                break
+        return result
     @staticmethod
     def do_csv():
         walker = FileWalker(paths)

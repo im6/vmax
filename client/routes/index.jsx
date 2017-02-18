@@ -6,6 +6,7 @@ import { Global } from '../config/global';
 
 import App from '../modules/app/index.jsx';
 import List from '../modules/list';
+import Star from '../modules/Star';
 
 const Routes = ({ history, store }) => {
 
@@ -13,6 +14,7 @@ const Routes = ({ history, store }) => {
     <Route path="/"
            component={App}>
       <IndexRoute component={List}/>
+      <Route path="star" component={Star} />
     </Route>
   </Router>;
 };
