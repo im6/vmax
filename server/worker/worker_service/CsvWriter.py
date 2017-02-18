@@ -5,7 +5,7 @@ class CsvWriter:
     def __init__(self):
         pass
     def start(self, map, list):
-        fileName = 'REPORT.csv'
+        fileName = 'local/REPORT.csv'
         full_path = os.path.join("./", fileName)
         fieldnames = []
 

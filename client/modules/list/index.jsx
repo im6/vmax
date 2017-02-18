@@ -59,7 +59,7 @@ class List extends React.Component {
   scrollHandler(st, ev) {
     let me = this;
 
-    if(me.props.loading || me.isAnimating || me.props.type){
+    if(me.props.loading || me.isAnimating){
       return false;
     }
 
@@ -91,7 +91,7 @@ class List extends React.Component {
 
     return <div style={{minHeight: 800}}>
       {
-        me.props.colorType != 'portfolio' && me.props.colorType != 'like' ?
+        !me.props.type ?
           <EventListener
             target="window"
             onScroll={debounce(me.scrollHandler.bind(me, SCROLLTOLERANCE))}

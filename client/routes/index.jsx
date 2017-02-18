@@ -13,7 +13,6 @@ const Routes = ({ history, store }) => {
     <Route path="/"
            component={App}>
       <IndexRoute component={List}/>
-      <Route path="star" component={Star} />
     </Route>
   </Router>;
 };

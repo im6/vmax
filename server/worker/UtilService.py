@@ -20,7 +20,7 @@ class UtilService:
     @staticmethod
     def csv_to_list():
         list = []
-        with open(os.path.join(os.getcwd(), 'REPORT.csv'), 'rb') as f:
+        with open(os.path.join(os.getcwd(), 'local/REPORT.csv'), 'rb') as f:
             reader = csv.reader(f)
             for row in reader:
                 oneRow = UtilService.map_list_item(row)
