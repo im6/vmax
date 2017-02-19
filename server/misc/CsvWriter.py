@@ -21,7 +21,7 @@ class CsvWriter:
             for oneIndex, oneItem in enumerate(list):
                 item = {}
                 for h in fieldnames:
-                    item[h] = oneItem[map[h]]
+                    item[h] = unicode(oneItem[map[h]]).encode("utf-8")
                 writer.writerow(item)
 
         print('create csv succesfully!')

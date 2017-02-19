@@ -1,11 +1,12 @@
 import os
 import re
 import subprocess
-from local.constant_var import company_exception
+from server.misc.util import json_reader
 
+json_config = json_reader('./local/movie_config.json')
+company_exception = json_config["company_exception"]
+default_movie_ext = json_config["default_movie_ext"]
 
-default_movie_ext = ['mp4', 'avi', 'mkv', 'wmv']
-defaultReg = "^[a-zA-Z]{2,8}(|-|_)[0-9]{2,6}"
 defaultReg2 = "^(" + '|'.join(company_exception) + "|[a-zA-Z]{2,8})(|-|_)[0-9]{2,6}"
 
 
