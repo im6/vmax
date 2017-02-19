@@ -72,7 +72,8 @@ const movie = handleActions({
     totalMovie = action.payload;
     return state.merge({
       loading: false,
-      list: getNewList()
+      list: getNewList(),
+      type: null,
     });
   },
   ['movie/dup'](state, action) {
