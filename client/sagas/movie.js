@@ -12,7 +12,20 @@ function* watchers(a) {
     takeLatest("movie/dup", workerDup),
     takeLatest("movie/search", workerSearch),
     takeLatest("movie/imgpair", workerImgPair),
+    takeLatest('movie/getCategory', getCategory),
   ]
+}
+
+function* getCategory() {
+  try {
+    const payload = yield call(requester, '/worker/category');
+    yield put({
+        type: "movie/getCategory/success",
+        payload: payload.data
+      });
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 function* workerImgPair(action) {
@@ -110,6 +123,9 @@ function* getMovies(action) {
 
 export default function*(){
   yield fork(watchers);
-  let actCreater = createAction('movie/get');
-  yield put(actCreater());
+  let actCreater0 = createAction('movie/get');
+  yield put(actCreater0());
+  
+  let actCreater1 = createAction('movie/getCategory');
+  yield put(actCreater1());
 }

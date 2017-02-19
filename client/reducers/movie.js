@@ -22,7 +22,7 @@ const movie = handleActions({
   ['movie/starFilter'](state, action) {
     let name = action.payload.name;
     let filtered = totalMovie.filter(v => {
-      return v.r.indexOf(name) > -1;
+      return v.r.indexOf('/' + name + '/') > -1;
     });
     return state.merge({
       list: filtered,
@@ -137,11 +137,31 @@ const movie = handleActions({
       loading: false
     });
   },
+  
+  
+  ['movie/getCategory'](state, action) {
+    return state.merge({
+      loading: true
+    });
+  },
+  ['movie/getCategory/fail'](state, action) {
+    return state.merge({
+      loading: false
+    });
+  },
+  
+  ['movie/getCategory/success'](state, action) {
+    return state.merge({
+      category: action.payload,
+      loading: false
+    });
+  }, 
 
 }, Immutable.fromJS({
   list: [],
   loading: true,
-  type: null
+  type: null,
+  category: []
 }));
 
 export default movie;

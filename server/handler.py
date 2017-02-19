@@ -3,8 +3,8 @@ import os
 import json
 import subprocess
 from urlparse import urlparse
-from worker.UtilService import UtilService
-from worker.JobWorker import JobWorker
+from server.service.UtilService import UtilService
+from server.service.JobWorker import JobWorker
 
 
 class mainHandler(tornado.web.RequestHandler):
@@ -62,8 +62,8 @@ class workerHandler(tornado.web.RequestHandler):
                 'data': dup_data
             }))
 
-        elif rsc == 'star':
-            dup_data = JobWorker.do_star()
+        elif rsc == 'category':
+            dup_data = JobWorker.do_category()
             self.write(json.dumps({
                 'data': dup_data
             }))

@@ -99,9 +99,14 @@ class List extends React.Component {
           null
       }
       <Row>
-        <Col lg={24}>
-          <StarGroup onClick={me.onNameClick.bind(me)} list={me.props.name} />
-        </Col>
+        { 
+          me.props.category.map((v,k) => 
+            <Col lg={24} key={k}>
+              <StarGroup onClick={me.onNameClick.bind(me)} list={v} />
+            </Col>
+          )
+        }
+        
       </Row>
       
 
@@ -130,12 +135,12 @@ class List extends React.Component {
   }
 }
 
-function mapStateToProps({movie, star}){
+function mapStateToProps({movie}){
   return {
     list: movie.get('list'),
     loading: movie.get('loading'),
     type: movie.get('type'),
-    name: star.get('name')
+    category: movie.get('category')
   }
 }
 

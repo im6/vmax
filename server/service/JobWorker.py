@@ -2,22 +2,25 @@ import os
 from server.misc.CsvWriter import CsvWriter
 from server.misc.util import json_reader
 from server.misc.FileWalker import FileWalker
-from server.worker.UtilService import UtilService
+from server.service.UtilService import UtilService
 
 json_config = json_reader('./local/movie_config.json')
-paths, img_temp, star_path = json_config["paths"], json_config["img_temp"], json_config["star_path"][0]
+paths, img_temp, star_path = json_config["paths"], json_config["img_temp"], json_config["star_path"]
 
 class JobWorker:
     def __init__(self):
         pass
 
     @staticmethod
-    def do_star():
+    def do_category():
         result = []
-        for root, dirs, files in os.walk(star_path):
-            if not result:
-                result = dirs
-                break
+        for one_cat in star_path:
+            one_group = []
+            for root, dirs, files in os.walk(one_cat):
+                if not one_group:
+                    one_group = dirs
+                    break
+            result.append(one_group)
         return result
     @staticmethod
     def do_csv():
