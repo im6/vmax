@@ -62,35 +62,7 @@ class SlideoutMenu extends React.Component {
 
           </Menu.Item>
         </SubMenu>
-        <SubMenu key="sce" title={<h3><Icon type="appstore" />Scenario</h3>}>
-          <Menu.Item key="home">
-            <h3>
-              <Icon type="android" />
-              Home
-            </h3>
-          </Menu.Item>
-          <Menu.Item key="hotel">
-            <h3>
-              <Icon type="android" />
-              Hotel
-            </h3>
-          </Menu.Item>
-        </SubMenu>
 
-        <SubMenu key="tools" title={<h3><Icon type="edit" />Tools</h3>}>
-          <Menu.Item key="dup">
-            <h3>
-              <Icon type="android" />
-              Dup Detector
-            </h3>
-          </Menu.Item>
-          <Menu.Item key="udpate">
-            <h3>
-              <Icon type="android" />
-              Updater
-            </h3>
-          </Menu.Item>
-        </SubMenu>
 
       </Menu>
     </div>;
