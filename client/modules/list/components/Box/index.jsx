@@ -25,7 +25,7 @@ class Box extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState){
     let me = this;
-    let isSame = (me.props.detail.get('c') + me.props.detail.get('i')) === (nextProps.detail.get('c') + nextProps.detail.get('i'));
+    let isSame = me.props.detail.get('r') === nextProps.detail.get('r');
     return !isSame;
   }
 
@@ -61,11 +61,12 @@ class Box extends React.Component {
         me.props.detail.get('m').map((v, k) => {
           return <Button
             key={k}
+            size="large"
             style={{marginRight: 8}}
             onClick={me.onPlay.bind(me, me.props.detail.get('r') + '/' + v)}
             icon="caret-right"
             type="primary">
-            &nbsp;  {k+1}
+            &nbsp;  { me.props.detail.get('m').size > 1 ? (k+1) : "" }
           </Button>
         })
       }
