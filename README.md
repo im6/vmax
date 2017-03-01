@@ -12,7 +12,7 @@ via github:
 
     $ git clone https://github.com/zj1926/vmax.git
     $ cd vmax
-    $ mkdir local && touch local/movie_config.json
+    $ mkdir local && touch local/movie_config.json  # similar to the example below
     $ virtualenv env
     $ source env/bin/activation
     $ pip install -r requirements.txt

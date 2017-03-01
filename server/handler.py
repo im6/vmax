@@ -89,6 +89,7 @@ class workerHandler(tornado.web.RequestHandler):
                 self.write(json.dumps({
                     'data': filter_data
                 }))
+
             except Exception as e:
                 print(e)
                 self.write(json.dumps({
