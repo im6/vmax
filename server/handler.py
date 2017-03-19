@@ -3,8 +3,8 @@ import os
 import json
 import subprocess
 from urlparse import urlparse
-from server.service.UtilService import UtilService
-from server.service.JobWorker import JobWorker
+import server.service.UtilService as UtilService
+import server.service.JobWorker as JobWorker
 
 
 class mainHandler(tornado.web.RequestHandler):

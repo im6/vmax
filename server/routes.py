@@ -1,6 +1,4 @@
-import os
-import tornado.web
-from server.handler import mainHandler, movieHandler, resourceHandler, actionHandler, workerHandler
+from server.handler import *
 
 routes = [
     (r"/", mainHandler),
