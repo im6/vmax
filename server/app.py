@@ -8,4 +8,3 @@ settings = {
 }
 
 application = wsgi.WSGIApplication(routes, **settings)
-
