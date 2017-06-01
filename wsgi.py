@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
-import imp
+from server.app import application
 from wsgiref.simple_server import make_server
 
 PORT = 5001
+IP = 'localhost'
 
 if __name__ == '__main__':
-    ip   = 'localhost'
-    app = imp.load_source('application', 'server/app.py')
-    httpd = make_server(ip, PORT, app.application)
-    print('app is running on port: %s' % (PORT))
+    httpd = make_server(host=IP, port=PORT, app=application)
+    print('app is running on %s:%s ...' % (IP, PORT))
     httpd.serve_forever()

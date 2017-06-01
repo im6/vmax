@@ -1,4 +1,5 @@
-import tornado.web
+from tornado.web import RequestHandler
+from tornado import escape
 import os
 import json
 import subprocess
@@ -7,18 +8,18 @@ import server.service.UtilService as UtilService
 import server.service.JobWorker as JobWorker
 
 
-class mainHandler(tornado.web.RequestHandler):
+class mainHandler(RequestHandler):
     def get(self):
         view_path = os.path.join("../public", 'index.html')
         self.set_header("Cache-control", "no-cache")
         self.render(view_path)
 
-class movieHandler(tornado.web.RequestHandler):
+class movieHandler(RequestHandler):
     def post(self, a):
         list = UtilService.csv_to_list()
         self.write(json.dumps(list))
 
-class resourceHandler(tornado.web.RequestHandler):
+class resourceHandler(RequestHandler):
     def get(self, rsc):
         try:
             rsc1 = urlparse(rsc).geturl()
@@ -33,10 +34,10 @@ class resourceHandler(tornado.web.RequestHandler):
             self.write('null')
 
 
-class actionHandler(tornado.web.RequestHandler):
+class actionHandler(RequestHandler):
     def post(self, rsc):
         try:
-            bodyData = tornado.escape.json_decode(self.request.body)
+            bodyData = escape.json_decode(self.request.body)
             url = bodyData['url']
             subprocess.call(['open', url])
             self.write({'status': 'ok'})
@@ -47,7 +48,7 @@ class actionHandler(tornado.web.RequestHandler):
             self.write('null')
 
 
-class workerHandler(tornado.web.RequestHandler):
+class workerHandler(RequestHandler):
     def post(self, rsc):
         if rsc == 'refresh':
             JobWorker.do_csv()
@@ -75,7 +76,7 @@ class workerHandler(tornado.web.RequestHandler):
             }))
         elif rsc == 'filter':
             try:
-                bodyData = tornado.escape.json_decode(self.request.body)
+                bodyData = escape.json_decode(self.request.body)
                 keyword = bodyData['keyword']
                 filter_data = []
 

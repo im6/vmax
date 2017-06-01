@@ -1,4 +1,5 @@
 from server.handler import *
+from tornado.web import StaticFileHandler
 
 routes = [
     (r"/", mainHandler),
@@ -6,5 +7,5 @@ routes = [
     (r"/resource/(.*)", resourceHandler),
     (r"/action/(.*)", actionHandler),
     (r"/worker/(.*)", workerHandler),
-    (r"/(.*)", tornado.web.StaticFileHandler, {'path': os.path.join(os.getcwd(), 'public')}),
+    (r"/(.*)", StaticFileHandler, {'path': os.path.join(os.getcwd(), 'public')}),
 ]
