@@ -100,6 +100,11 @@ class Layout extends React.Component {
     const ac = createAction('movie/imgpair');
     me.props.dispatch(ac());
   }
+  onLayoutChange(a){
+    const me = this;
+    const ac = createAction('movie/changeLayout');
+    me.props.dispatch(ac(a));
+  }
 
   render() {
     let me = this;
@@ -123,6 +128,7 @@ class Layout extends React.Component {
           onReturn={me.onReturn.bind(me)}
           onSearch={me.onSearch.bind(me)}
           onImgPair={me.onImgPair.bind(me)}
+          onLayoutChange={me.onLayoutChange.bind(me)}
         />
         <div
           className={styles.main}

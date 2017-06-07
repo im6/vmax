@@ -119,8 +119,8 @@ class List extends React.Component {
           me.props.list.map((v, k) => {
             return (<Col xs={24}
                          sm={24}
-                         md={12}
-                         lg={12}
+                         md={24/me.props.layoutNum}
+                         lg={24/me.props.layoutNum}
                          key={k}
                          className={style.colContainer}>
               <Box
@@ -140,7 +140,8 @@ function mapStateToProps({movie}){
     list: movie.get('list'),
     loading: movie.get('loading'),
     type: movie.get('type'),
-    category: movie.get('category')
+    category: movie.get('category'),
+    layoutNum: movie.get('layout')
   }
 }
 

@@ -156,9 +156,16 @@ const movie = handleActions({
       category: action.payload,
       loading: false
     });
+  },
+  ['movie/changeLayout'](state, action) {
+    const layout = parseInt(action.payload);
+    return state.merge({
+      layout
+    });
   }, 
 
 }, Immutable.fromJS({
+  layout: 2,
   list: [],
   loading: true,
   type: null,

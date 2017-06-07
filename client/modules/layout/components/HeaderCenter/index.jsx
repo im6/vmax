@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import { Row, Col, Menu, Icon, Button, Spin, Input } from 'antd';
+import { Row, Col, Menu, Icon, Button, Spin, Input, Select } from 'antd';
 const Search = Input.Search;
-
+const Option = Select.Option;
 import MenuButton from './components/MenuButton';
 
 import { Link } from 'react-router';
@@ -14,14 +14,13 @@ const HeaderCenter = ({isNavBtnActive, onRefresh,
   onSearch,
   isLoading, 
   onImgPair,
-  viewType
+  viewType,
+  onLayoutChange
 }) => {
 
   return <header className={style.header}>
     <Row>
-
       <Col lg={20} md={19} sm={18} xs={24} className={style.leftHeaderContainer}>
-
         <MenuButton isNavBtnActive={isNavBtnActive}/>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Button 
@@ -59,6 +58,15 @@ const HeaderCenter = ({isNavBtnActive, onRefresh,
           size="large"
           onSearch={onSearch}
         />
+        &nbsp;
+        &nbsp;
+        
+        <Select defaultValue="2" 
+                size="large"
+                style={{ width: 50 }} onChange={onLayoutChange}>
+          <Option value="2">2</Option>
+          <Option value="3">3</Option>
+        </Select>
 
       </Col>
 
