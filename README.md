@@ -1,6 +1,6 @@
 # vmax
 
-A python web framework for movie browser.
+A perfect movie manager by python tornado.
 
 ![screenshot](/assets/banner2.png)
 
