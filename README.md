@@ -2,7 +2,7 @@
 
 A python web framework for movie browser.
 
-![screenshot](/assets/banner1.png)
+![screenshot](/assets/banner2.png)
 
 ##Installation
 
