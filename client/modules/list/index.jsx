@@ -18,7 +18,6 @@ class List extends React.Component {
   constructor(props) {
     super(props);
     let me = this;
-    me.isAnimating = true;
   }
 
   componentDidMount() {
@@ -29,7 +28,6 @@ class List extends React.Component {
 
   componentWillReceiveProps(nextProps){
     let me = this;
-    me.isAnimating = nextProps.list.size != this.props.list.size;
   }
   
   onOpen(url){
@@ -58,11 +56,9 @@ class List extends React.Component {
 
   scrollHandler(st, ev) {
     let me = this;
-
-    if(me.props.loading || me.isAnimating){
+    if(me.props.loading){
       return false;
     }
-
     let elem = ev.target.body;
     let scrollBtn = elem.scrollHeight - elem.clientHeight - elem.scrollTop;
     if(scrollBtn < st){
@@ -72,10 +68,7 @@ class List extends React.Component {
   };
 
   onAnimEnd(endKey, type){
-    let me = this;
-    if(endKey === type.key){
-      me.isAnimating = false;
-    }
+    const me = this;
   }
 
   render() {
