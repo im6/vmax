@@ -167,7 +167,7 @@ const movie = handleActions({
 
   ['movie/jumpTo'](state, action) {
     const ratio = action.payload;
-    const crt = totalMovie.length * ratio;
+    const crt = Math.round(totalMovie.length * ratio);
     currentStart = crt;
     currentEnd = crt;
     return state.merge({
