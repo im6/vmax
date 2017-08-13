@@ -74,10 +74,10 @@ const HeaderCenter = ({
         &nbsp;
         &nbsp;
         
-        <Select defaultValue="3" 
+        <Select defaultValue="0" 
                 size="large"
                 style={{ width: 80 }} onChange={onProgressChange}>
-          <Option value="0">0</Option>
+          <Option value="0">0%</Option>
           <Option value="1">10%</Option>
           <Option value="2">20%</Option>
           <Option value="3">30%</Option>
