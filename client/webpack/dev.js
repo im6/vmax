@@ -28,8 +28,15 @@ Object.assign(baseTemplate, {
     // serve index.html in place of 404 responses to allow HTML5 history
     historyApiFallback: true,
     port: asset.constant.port,
-    host: asset.constant.host
-  }
+    host: asset.constant.host,
+    proxy: {
+      '*': {
+        target: 'http://localhost:5001', // NOTE: your express.js server port number
+        secure: false
+      }
+    }
+  },
+  
 });
 
 module.exports = baseTemplate;

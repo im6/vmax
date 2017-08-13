@@ -105,6 +105,11 @@ class Layout extends React.Component {
     const ac = createAction('movie/changeLayout');
     me.props.dispatch(ac(a));
   }
+  onProgressChange(a){
+    const me = this;
+    const ac = createAction('movie/jumpTo');
+    me.props.dispatch(ac(parseInt(a)/10));
+  }
 
   render() {
     let me = this;
@@ -129,6 +134,7 @@ class Layout extends React.Component {
           onSearch={me.onSearch.bind(me)}
           onImgPair={me.onImgPair.bind(me)}
           onLayoutChange={me.onLayoutChange.bind(me)}
+          onProgressChange={me.onProgressChange.bind(me)}
         />
         <div
           className={styles.main}

@@ -8,14 +8,17 @@ import { Link } from 'react-router';
 import style from './style.less';
 
 
-const HeaderCenter = ({isNavBtnActive, onRefresh, 
+const HeaderCenter = ({
+  isNavBtnActive,
+  onRefresh,
   onReturn,
   onDup, 
   onSearch,
   isLoading, 
   onImgPair,
   viewType,
-  onLayoutChange
+  onLayoutChange,
+  onProgressChange
 }) => {
 
   return <header className={style.header}>
@@ -66,6 +69,24 @@ const HeaderCenter = ({isNavBtnActive, onRefresh,
                 style={{ width: 50 }} onChange={onLayoutChange}>
           <Option value="2">2</Option>
           <Option value="3">3</Option>
+        </Select>
+        
+        &nbsp;
+        &nbsp;
+        
+        <Select defaultValue="3" 
+                size="large"
+                style={{ width: 80 }} onChange={onProgressChange}>
+          <Option value="0">0</Option>
+          <Option value="1">10%</Option>
+          <Option value="2">20%</Option>
+          <Option value="3">30%</Option>
+          <Option value="4">40%</Option>
+          <Option value="5">50%</Option>
+          <Option value="6">60%</Option>
+          <Option value="7">70%</Option>
+          <Option value="8">80%</Option>
+          <Option value="9">90%</Option>
         </Select>
 
       </Col>

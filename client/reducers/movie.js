@@ -5,11 +5,12 @@ import { message } from 'antd';
 
 const STEP = 18;
 let totalMovie = null,
+  currentStart = 0,
   currentEnd = 0;
 
-let getNewList = () => {
+const getNewList = () => {
   let result = [];
-  for(let i = 0; i < currentEnd + STEP; i ++){
+  for(let i = currentStart; i < currentEnd + STEP; i ++){
     result.push(totalMovie[i]);
   }
   
@@ -161,6 +162,16 @@ const movie = handleActions({
     const layout = parseInt(action.payload);
     return state.merge({
       layout
+    });
+  }, 
+
+  ['movie/jumpTo'](state, action) {
+    const ratio = action.payload;
+    const crt = totalMovie.length * ratio;
+    currentStart = crt;
+    currentEnd = crt;
+    return state.merge({
+      list: getNewList(),
     });
   }, 
 
