@@ -59,7 +59,7 @@ class List extends React.Component {
     if(me.props.loading){
       return false;
     }
-    let elem = ev.target.body;
+    let elem = ev.target.scrollingElement;
     let scrollBtn = elem.scrollHeight - elem.clientHeight - elem.scrollTop;
     if(scrollBtn < st){
       let actcr = createAction('movie/loadmore');
