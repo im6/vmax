@@ -8,7 +8,7 @@ A perfect video manager by python tornado.
 git clone https://github.com/zj1926/vmax.git
 cd vmax
 mkdir local && touch local/movie_config.json  # similar to the example below
-virtualenv env
+virtualenv -p /usr/bin/python2.7 env
 source env/bin/activation
 pip install -r requirements.txt
 python main.py
