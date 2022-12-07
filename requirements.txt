@@ -1,5 +1,5 @@
 backports-abc==0.5
-certifi==2017.1.23
+certifi==2022.12.7
 singledispatch==3.4.0.3
 six==1.10.0
 tornado==4.4.2
